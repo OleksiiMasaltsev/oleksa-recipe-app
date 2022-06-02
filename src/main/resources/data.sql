@@ -7,4 +7,6 @@ INSERT INTO unit_of_measure (description) VALUES ('Tablespoon');
 INSERT INTO unit_of_measure (description) VALUES ('Cup');
 INSERT INTO unit_of_measure (description) VALUES ('Pinch');
 INSERT INTO unit_of_measure (description) VALUES ('Ounce');
-INSERT INTO recipe (description) VALUES ('Chicken');
+INSERT INTO recipe (description) VALUES ('Chicken soup');
+INSERT INTO recipe (description) VALUES ('Pasta');
+INSERT INTO recipe (description) VALUES ('Borsch');
