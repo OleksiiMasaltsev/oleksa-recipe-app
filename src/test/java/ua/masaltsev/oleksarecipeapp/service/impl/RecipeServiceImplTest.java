@@ -1,6 +1,5 @@
 package ua.masaltsev.oleksarecipeapp.service.impl;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -27,22 +26,6 @@ class RecipeServiceImplTest {
         recipeServiceImpl = new RecipeServiceImpl(recipeRepository);
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
-    @Test
-    void findByDescription() {
-    }
-
-    @Test
-    void save() {
-    }
-
-    @Test
-    void findById() {
-    }
-
     @Test
     void findAll() {
 
@@ -55,13 +38,5 @@ class RecipeServiceImplTest {
         List<Recipe> recipes = recipeServiceImpl.findAll();
         assertEquals(recipes.size(), 1);
         verify(recipeRepository, times(1)).findAll();
-    }
-
-    @Test
-    void deleteById() {
-    }
-
-    @Test
-    void delete() {
     }
 }
