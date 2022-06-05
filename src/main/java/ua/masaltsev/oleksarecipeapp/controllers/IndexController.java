@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ua.masaltsev.oleksarecipeapp.domain.Recipe;
-import ua.masaltsev.oleksarecipeapp.service.impl.RecipeServiceImpl;
+import ua.masaltsev.oleksarecipeapp.service.RecipeService;
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import java.util.List;
 @Controller
 public class IndexController {
 
-    private final RecipeServiceImpl recipeService;
+    private final RecipeService recipeService;
 
-    public IndexController(RecipeServiceImpl recipeService) {
+    public IndexController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
