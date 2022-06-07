@@ -39,8 +39,8 @@ class IndexControllerTest {
 //
 //        when(recipeService.findAll()).thenReturn(recipes);
 
-        String viewName = indexController.getIndex(model);
-        assertEquals("index", viewName);
+        String viewName = indexController.getHome(model);
+        assertEquals("recipes_home", viewName);
 
         verify(recipeService, times(1)).findAll();
         verify(model, times(1)).addAttribute(eq("recipes"), anyList());
@@ -51,7 +51,7 @@ class IndexControllerTest {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
         mockMvc.perform(MockMvcRequestBuilders.get("/"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("index"));
+                .andExpect(MockMvcResultMatchers.view().name("recipes_home"));
     }
 
 
