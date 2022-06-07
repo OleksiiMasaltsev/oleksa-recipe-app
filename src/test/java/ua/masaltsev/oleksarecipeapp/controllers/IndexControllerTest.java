@@ -31,32 +31,28 @@ class IndexControllerTest {
     }
 
     @Test
-    void getIndex() {
+    void returns_recipe_home() {
 
-//        List<Recipe> recipes = new ArrayList<>();
-//        recipes.add(new Recipe());
-//        recipes.add(new Recipe());
-//
-//        when(recipeService.findAll()).thenReturn(recipes);
-
-        String viewName = indexController.getIndex(model);
-        assertEquals("index", viewName);
+        String viewName = indexController.getHome(model);
+        assertEquals("recipes_home", viewName);
 
         verify(recipeService, times(1)).findAll();
         verify(model, times(1)).addAttribute(eq("recipes"), anyList());
     }
 
     @Test
-    void testMockMvc() throws Exception {
+    void request_gets_recipe_home() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
         mockMvc.perform(MockMvcRequestBuilders.get("/"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("index"));
+                .andExpect(MockMvcResultMatchers.view().name("recipes_home"));
     }
 
-
-
-
-
-
+    @Test
+    void show_request_gets_show_view() throws Exception {
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
+        mockMvc.perform(MockMvcRequestBuilders.get("/recipe/show/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.view().name("recipe/show"));
+    }
 }
