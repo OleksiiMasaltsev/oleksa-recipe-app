@@ -23,8 +23,7 @@ public class IndexController {
 
     @RequestMapping({"", "/", "/index"})
     public String getHome(Model model) {
-
-        log.debug("inside getIndex");
+        log.debug("debug - inside getHome");
         List<Recipe> recipes = recipeService.findAll();
         model.addAttribute("recipes", recipes);
 
@@ -33,6 +32,7 @@ public class IndexController {
 
     @RequestMapping("/recipe/show/{id}")
     public String showById(@PathVariable String id, Model model) {
+        System.out.println("inside showById");
         Optional<Recipe> optionalRecipe = recipeService.findById(Long.valueOf(id));
         optionalRecipe.ifPresent(model::addAttribute);
         return "recipe/show";

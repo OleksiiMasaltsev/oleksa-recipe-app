@@ -5,14 +5,15 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import ua.masaltsev.oleksarecipeapp.service.RecipeService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 class IndexControllerTest {
 
@@ -31,13 +32,7 @@ class IndexControllerTest {
     }
 
     @Test
-    void getIndex() {
-
-//        List<Recipe> recipes = new ArrayList<>();
-//        recipes.add(new Recipe());
-//        recipes.add(new Recipe());
-//
-//        when(recipeService.findAll()).thenReturn(recipes);
+    void getHome_ViewNameIsRecipesHome_True() {
 
         String viewName = indexController.getHome(model);
         assertEquals("recipes_home", viewName);
@@ -47,16 +42,18 @@ class IndexControllerTest {
     }
 
     @Test
-    void testMockMvc() throws Exception {
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
-        mockMvc.perform(MockMvcRequestBuilders.get("/"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("recipes_home"));
+    void request_gets_recipe_home() throws Exception {
+        MockMvc mockMvc = standaloneSetup(indexController).build();
+        mockMvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipes_home"));
     }
 
-
-
-
-
-
+    @Test
+    void showById_requestByIdReturnsShow_True() throws Exception {
+        MockMvc mockMvc = standaloneSetup(indexController).build();
+        mockMvc.perform(get("/recipe/show/1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("recipe/show"));
+    }
 }
