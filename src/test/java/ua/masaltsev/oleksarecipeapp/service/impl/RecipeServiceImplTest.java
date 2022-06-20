@@ -9,6 +9,7 @@ import ua.masaltsev.oleksarecipeapp.repositories.RecipeRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -38,5 +39,35 @@ class RecipeServiceImplTest {
         List<Recipe> recipes = recipeServiceImpl.findAll();
         assertEquals(recipes.size(), 1);
         verify(recipeRepository, times(1)).findAll();
+    }
+
+
+    @Test
+    void findByDescription() {
+    }
+
+    @Test
+    void save() {
+    }
+
+    @Test
+    void findById() {
+        Recipe recipe = new Recipe();
+        long id = 3L;
+        recipe.setId(id);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(Optional.of(recipe));
+        Optional<Recipe> optionalRecipe = recipeServiceImpl.findById(id);
+
+        optionalRecipe.ifPresent(value -> assertEquals(id, value.getId()));
+        verify(recipeRepository, times(1)).findById(anyLong());
+    }
+
+    @Test
+    void deleteById() {
+    }
+
+    @Test
+    void delete() {
     }
 }
